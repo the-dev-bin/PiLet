@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
 import { PioutletStatusComponent } from '../pioutlet-status/pioutlet-status.component';
 import { ScheduleComponent } from '../schedule/schedule.component';
+import { UpcomingComponent } from '../upcoming/upcoming.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { ScheduleComponent } from '../schedule/schedule.component';
   ],
   declarations: [HomePage,
     PioutletStatusComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    UpcomingComponent,
   ]
 })
 export class HomePageModule {}
