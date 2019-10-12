@@ -1,10 +1,18 @@
-from typing import Tuple
+import time
 
 import RPi.GPIO as GPIO
 
 
-def relay_setup(channel_list: Tuple) -> None:
+def relay_setup(channel) -> None:
     GPIO.setboard(GPIO.BOARD)
-    GPIO.setup(channel_list[0], GPIO.IN)
-    GPIO.setup(channel_list[1], GPIO.OUT)
-    GPIO.setup(channel_list[2], GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(channel, GPIO.OUT)
+
+    for i in range(50):
+        GPIO.output(channel, True)
+        time.sleep(1)
+        print('On')
+        GPIO.output(channel, False)
+        time.sleep(1)
+        print('Off')
+
+    GPIO.cleanup()
