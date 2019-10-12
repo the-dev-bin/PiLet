@@ -1,0 +1,17 @@
+
+    <div class="schedule-wrapper">
+      <ion-label>
+        Schedule your car to start!
+      </ion-label>
+        <ion-item>
+            <ion-label>Choose a date</ion-label>
+            <ion-datetime value="1995-04-15" min="1990-02" max="2000"
+              [dayShortNames]="customDayShortNames"
+              displayFormat="DDD. MMM DD, YY"
+              monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"></ion-datetime>
+          </ion-item>
+          <ion-item>
+              <ion-label>Choose a time</ion-label>
+              <ion-datetime displayFormat="h:mm A" minuteValues="0,15,30,45"></ion-datetime>
+            </ion-item>
+    </div>
