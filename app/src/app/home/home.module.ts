@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { PioutletStatusComponent } from '../pioutlet-status/pioutlet-status.component';
 
 @NgModule({
   imports: [
@@ -16,8 +17,11 @@ import { HomePage } from './home.page';
         path: '',
         component: HomePage
       }
-    ])
+    ]),
+
   ],
-  declarations: [HomePage]
+  declarations: [HomePage,
+    PioutletStatusComponent
+  ]
 })
 export class HomePageModule {}
