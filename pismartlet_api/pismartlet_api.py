@@ -16,19 +16,25 @@ class API(Resource):
 
     # Returns a json file
     # returns next_start and length (A dictionary)
-    def post_status(self):
+    def get_status(self):
         # Call get_data()
         # put contents of get_data() into json and return
         pass
 
     def get_data(self, file) -> Dict:
-        # pulls data
+        # pulls data from json
         pass
 
-    # Writes the data to json
+    # Sends the json to the pi
     def post_status(self, file) -> None:
         pass
 
     @staticmethod
     def get_weather():
         pass
+
+
+api.add_resouce(API, '/')
+
+if __name__ == '__main__':
+    app.run(debug=True)
