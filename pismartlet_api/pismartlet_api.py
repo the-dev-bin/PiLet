@@ -24,9 +24,7 @@ def get_status():
 @app.route("/postStatus", methods=['POST'])
 @cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def post_status():
-    print('post')
     data = json.loads(request.get_json())
-    print(type(data))
     start = data['start']
     status = data['status']
 
@@ -138,9 +136,10 @@ def update_json(start, status):
     json_file =  open(DATA, 'r')
     data = json.load(json_file)
     json_file.close()
-
+    print(f"{start} {status}")
     for event in data:
         if event['start'] == start:
+            print('updating')
             event['status'] = status
 
     json_file = open(DATA, 'w')
