@@ -24,9 +24,21 @@ def get_status():
 @app.route("/postStatus", methods=['POST'])
 @cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def post_status():
-    data = request.get_json()
-    print(data)
+    data = json.loads(request.get_json())
+    start = data['start']
+    status = data['status']
+    print(start, " ", status)
+    for event in get_data():
+        if int(event['start']) == int(start):
+            update_json(start, status)
+    
     return "recived"
+
+
+@app.route("/getData", methods=['GET'])
+@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
+def get_all():
+    return jsonify(get_data())
 
 
 @app.route("/scheduleEvent", methods=['POST'])
@@ -115,6 +127,20 @@ def append_json(event):
     json_file.close()
 
     data.append(event)
+
+    json_file = open(DATA, 'w')
+    json_file.write(json.dumps(data))
+    json_file.close()
+
+def update_json(start, status):
+    json_file =  open(DATA, 'r')
+    data = json.load(json_file)
+    json_file.close()
+    print(f"{start} {status}")
+    for event in data:
+        if int(event['start']) == int(start):
+            print('updating')
+            event['status'] = status
 
     json_file = open(DATA, 'w')
     json_file.write(json.dumps(data))
