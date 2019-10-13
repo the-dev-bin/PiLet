@@ -27,7 +27,6 @@ def post_status():
     data = json.loads(request.get_json())
     start = data['start']
     status = data['status']
-    print(start, " ", status)
     for event in get_data():
         if int(event['start']) == int(start):
             update_json(start, status)
@@ -85,7 +84,10 @@ def get_schedule():
 @app.route("/active", methods=['GET'])
 @cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def is_active():
-    return
+    data = get_data()
+    for event in data:
+        if event['status'] == 'active':
+            return jsonify(event)
 
 @app.route('/test')
 def testing():
@@ -136,10 +138,8 @@ def update_json(start, status):
     json_file =  open(DATA, 'r')
     data = json.load(json_file)
     json_file.close()
-    print(f"{start} {status}")
     for event in data:
         if int(event['start']) == int(start):
-            print('updating')
             event['status'] = status
 
     json_file = open(DATA, 'w')
