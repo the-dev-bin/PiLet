@@ -134,7 +134,7 @@ def stringtoseconds(time)->int:
 
 
 def epochtodatetime(seconds)->str:
-    dateobj = datetime.fromtimestamp(seconds, timezone.akst)
+    dateobj = datetime.fromtimestamp(seconds, timezone.utc)
     return str(dateobj)
 
 
