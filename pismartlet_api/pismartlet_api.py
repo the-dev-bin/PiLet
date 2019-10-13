@@ -106,7 +106,7 @@ def get_next_three_pending() -> List:
 
 def append_json(event):
     with open (DATA, 'w') as json_file:
-        data = json.loads(json_file)
+        data = json.loads(json_file.read())
         data.append(event)
         json_file.write(str(data))
 
