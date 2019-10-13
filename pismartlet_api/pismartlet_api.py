@@ -4,7 +4,7 @@ from operator import itemgetter
 from typing import Dict, List
 
 from dateutil.parser import parse
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, make_response
 from flask_cors import CORS, cross_origin
 
 DATA = 'data.json'
@@ -84,8 +84,8 @@ def is_active():
     data = get_data()
     for event in data:
         if event['status'] == 'active':
-            return 'on', 201
-    return 'off', 201
+            return make_response('on', 201)
+    return make_response('off', 201)
 
 
 def get_data() -> List:
