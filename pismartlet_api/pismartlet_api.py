@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 cors = CORS(app, resources={r"/foo": {"origins": "http://localhost:port"}})
 
-@app.route("/get-status", methods='GET')
+@app.route("/getStatus", methods=['GET'])
 def get_status():
     return json.dumps(get_next_pending())
 
@@ -42,24 +42,24 @@ def get_next_pending() -> Dict:
     return current
 
 
-@app.route("/post-status", methods='GET')
+@app.route("/postStatus", methods=['POST'])
+@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def post_status():
     return
 
 
-@app.route("/schedule-event", methods='POST')
+@app.route("/scheduleEvent", methods=['POST'])
 @cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
-
 def schedule():
     return
 
 
-@app.route("/get-schedule", methods='GET')
+@app.route("/getSchedule", methods=['GET'])
 def get_schedule():
     return jsonify(get_data)
 
 
-@app.route("active", methods='GET')
+@app.route("active", methods=['GET'])
 def is_active():
     return
 
