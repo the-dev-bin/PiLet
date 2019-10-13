@@ -1,0 +1,6 @@
+<div class="upcoming-changes">
+    <ion-label>Upcoming changes</ion-label>
+  <div class="indiv-change" *ngFor="let data of dataStuff | keyvalue">
+      <p>{{ data.value.start | date:'short'}} - {{data.value.end | date:'short'}}</p>
+  </div>
+</div>
