@@ -2,12 +2,15 @@ import json
 from typing import Dict, List
 
 from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
 
 DATA = 'data.json'
 app = Flask(__name__)
 
+cors = CORS(app, resources={r"/foo": {"origins": "http://localhost:port"}})
 
 @app.route("/status", methods=['GET', 'POST'])
+@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def status():
     if (request.method == 'POST'):
         info = request.get_json()
@@ -50,4 +53,4 @@ def testing():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
