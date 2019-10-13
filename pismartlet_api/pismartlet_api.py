@@ -37,16 +37,16 @@ def schedule():
     time = data['time']
     #pull hours minutes from duration
     durration_time = data['duration']
-    durration = durration_time[11:16] #hours and minutes between 11 and 16
+    durration_time = durration_time[11:16] #hours and minutes between 11 and 16
     
     #pull timestamp from time and date
     start = date[:14] + time[:14] #date from date time from time
-    durration = start + stringtoseconds(durration)
+    durration = int(start) + stringtoseconds(durration)
 
     #define start as epoch timestamp
     start = datetimetoepoch(start)
     #define end as epoch
-    end = start + durration
+    end = int(start) + durration
 
     event = {
         "start" : start,
