@@ -87,7 +87,8 @@ def is_active():
     data = get_data()
     for event in data:
         if event['status'] == 'active':
-            return jsonify(event)
+            return True
+    return False
 
 @app.route('/test')
 def testing():
