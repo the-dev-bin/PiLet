@@ -1,11 +1,9 @@
 import json
-
 from datetime import datetime, timezone
-from dateutil.parser import parse 
-
 from operator import itemgetter
 from typing import Dict, List
 
+from dateutil.parser import parse
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 
@@ -16,53 +14,52 @@ cors = CORS(app, resources={r"/foo": {"origins": "http://localhost:port"}})
 
 
 @app.route("/getStatus", methods=['GET'])
-@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
-def get_status():
+@cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])
+def get_status() -> json:
     return jsonify(get_next_pending())
 
 
 @app.route("/postStatus", methods=['POST'])
-@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
-def post_status():
+@cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])
+def post_status() -> str:
     data = json.loads(request.get_json())
     start = data['start']
     status = data['status']
     for event in get_data():
         if int(event['start']) == int(start):
             update_json(start, status)
-    
+
     return "recived"
 
 
 @app.route("/getData", methods=['GET'])
-@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
-def get_all():
+@cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])
+def get_all() -> json:
     return jsonify(get_data())
 
 
 @app.route("/scheduleEvent", methods=['POST'])
-@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
-def schedule():
+@cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])
+def schedule() -> json:
     data = request.get_json()['data']
     date = data['date']
     time = data['time']
 
-    #pull hours minutes from duration
+    # pull hours minutes from duration
     durration_time = data['duration']
-    durration_time = durration_time[11:16] #hours and minutes between 11 and 16
-    
-    #pull timestamp from time and date
-    start_time = date[:10] + time[10:] #date from date time from time
+    durration_time = durration_time[11:16] # hours and minutes between 11 and 16
 
-    #define start as epoch timestamp
+    # pull timestamp from time and date
+    start_time = date[:10] + time[10:]  # date from date time from time
+
+    # define start as epoch timestamp
     start = datetimetoepoch(start_time)
     end = start + stringtoseconds(durration_time)
 
-
     event = {
-        "start" : int(start),
-        "end" : int(end),
-        "status" : "pending"
+        "start": int(start),
+        "end": int(end),
+        "status": "pending"
     }
 
     append_json(event)
@@ -71,8 +68,8 @@ def schedule():
 
 
 @app.route("/getSchedule", methods=['GET'])
-@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
-def get_schedule():
+@cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])
+def get_schedule() -> json:
 
     data = get_next_three_pending()
     for event in data:
@@ -82,7 +79,7 @@ def get_schedule():
 
 
 @app.route("/active", methods=['GET'])
-@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
+@cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])
 def is_active():
     data = get_data()
     for event in data:
@@ -90,9 +87,6 @@ def is_active():
             return 'on', 201
     return 'off', 201
 
-@app.route('/test')
-def testing():
-    return "<form action='/' method='POST'><input type='submit'></form>"
 
 def get_data() -> List:
     with open(DATA) as json_file:
@@ -108,7 +102,7 @@ def filter_pending_data() -> List:
             pending.append(event)
         else:
             continue
-    sorted_data = sorted(pending, key= itemgetter('start'))
+    sorted_data = sorted(pending, key=itemgetter('start'))
     print(sorted_data)
     return sorted_data
 
@@ -124,8 +118,8 @@ def get_next_three_pending() -> List:
     return data[0:3]
 
 
-def append_json(event):
-    json_file =  open(DATA, 'r')
+def append_json(event) -> None:
+    json_file = open(DATA, 'r')
     data = json.load(json_file)
     json_file.close()
 
@@ -135,8 +129,9 @@ def append_json(event):
     json_file.write(json.dumps(data))
     json_file.close()
 
-def update_json(start, status):
-    json_file =  open(DATA, 'r')
+
+def update_json(start, status) -> None:
+    json_file = open(DATA, 'r')
     data = json.load(json_file)
     json_file.close()
     for event in data:
@@ -148,19 +143,19 @@ def update_json(start, status):
     json_file.close()
 
 
-def datetimetoepoch(date_timestr)->int:
+def datetimetoepoch(date_timestr) -> int:
     date_object = parse(date_timestr)
     seconds = date_object.timestamp()
     return seconds
 
 
-def stringtoseconds(time)->int:
+def stringtoseconds(time) -> int:
     hours = int(time[:2])*60*60
     seconds = int(time[3:])*60
     return (hours+seconds)
 
 
-def epochtodatetime(seconds)->str:
+def epochtodatetime(seconds) -> str:
     dateobj = datetime.fromtimestamp(seconds, timezone.utc)
     return str(dateobj)
 
