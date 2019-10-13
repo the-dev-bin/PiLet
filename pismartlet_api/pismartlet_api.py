@@ -25,7 +25,8 @@ def get_status():
 @cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def post_status():
     print('post')
-    print(request.get_json())
+    data = request.get_json()
+    print(data)
     start = data['start']
     status = data['status']
 
