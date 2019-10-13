@@ -1,4 +1,4 @@
-import json
+import json, jsonify
 
 import requests
 
@@ -17,7 +17,7 @@ def get_content() -> json:
 
 def send_status(status, start_time) -> None:
     data = {"status": status, "start": start_time}
-    requests.post(postURL, json=json.dumps(data))
+    requests.post(postURL, data=jsonify(data))
 
 
 def main() -> None:
