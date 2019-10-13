@@ -26,7 +26,7 @@ def get_status():
 def post_status():
     print('post')
     data = request.get_json()
-    print(data)
+    print(type(json.load(data)))
     start = data['start']
     status = data['status']
 
