@@ -26,6 +26,7 @@ import { UpcomingComponent } from '../upcoming/upcoming.component';
     PioutletStatusComponent,
     ScheduleComponent,
     UpcomingComponent,
+    
   ]
 })
 export class HomePageModule {}

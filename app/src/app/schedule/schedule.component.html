@@ -11,11 +11,12 @@
               [dayShortNames]="customDayShortNames"
               displayFormat="DDD. MMM DD, YY"
               monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
-              ngModel name="date"></ion-datetime>
+              ngModel name="date"
+              placeholder="MMM DD YY" required></ion-datetime>
           </ion-item>
           <ion-item>
               <ion-label>Choose a time</ion-label>
-              <ion-datetime displayFormat="h:mm A" minuteValues="0,15,30,45"  ngModel name="time"></ion-datetime>
+              <ion-datetime displayFormat="h:mm A" minuteValues="0,15,30,45"  ngModel name="time" required></ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label>Duration(less than 4 hours)</ion-label>
