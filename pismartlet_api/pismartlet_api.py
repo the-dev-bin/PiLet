@@ -49,8 +49,8 @@ def schedule():
 
 
     event = {
-        "start" : str(start),
-        "end" : str(end),
+        "start" : int(start),
+        "end" : int(end),
         "status" : "pending"
     }
 
