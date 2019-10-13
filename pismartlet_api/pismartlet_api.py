@@ -29,7 +29,7 @@ def post_status():
     status = data['status']
     print(start, " ", status)
     for event in get_data():
-        if event['start'] == start:
+        if int(event['start']) == int(start):
             update_json(start, status)
     
     return "recived"
