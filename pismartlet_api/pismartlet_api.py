@@ -10,6 +10,8 @@ app = Flask(__name__)
 
 cors = CORS(app, resources={r"/foo": {"origins": "http://localhost:port"}})
 
+
+
 @app.route("/getStatus", methods=['GET'])
 @cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def get_status():
@@ -19,13 +21,15 @@ def get_status():
 @app.route("/postStatus", methods=['POST'])
 @cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def post_status():
-    return
+    print(request.get_data())
+    return "recived"
 
 
 @app.route("/scheduleEvent", methods=['POST'])
 @cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def schedule():
-    return
+    print(request.get_data())
+    return "recived"
 
 
 @app.route("/getSchedule", methods=['GET'])
