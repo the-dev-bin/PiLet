@@ -54,7 +54,7 @@ def schedule():
         "status" : "pending"
     }
 
-    # append_json(event)
+    append_json(event)
     print(event)
     return jsonify(data)
 
