@@ -35,12 +35,13 @@ def schedule():
     data = request.get_json()['data']
     date = data['date']
     time = data['time']
+
     #pull hours minutes from duration
     durration_time = data['duration']
     durration_time = durration_time[11:16] #hours and minutes between 11 and 16
     
     #pull timestamp from time and date
-    start_time = date[:14] + time[:14] #date from date time from time
+    start_time = date[:10] + time[:10] #date from date time from time
 
     #define start as epoch timestamp
     start = datetimetoepoch(start_time)
