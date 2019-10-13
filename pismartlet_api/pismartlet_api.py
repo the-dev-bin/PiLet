@@ -36,10 +36,13 @@ def filter_pending_data() -> List:
 def get_next_pending() -> Dict:
     data = filter_pending_data()
     current = data[0]
+    print(current)
     for event in data:
-        if event['start'] < current['start']:
+        print(event['start'])
+        if int(event['start']) < int(current['start']):
             current = event
     return current
+
 
 @app.route('/test')
 def testing():
