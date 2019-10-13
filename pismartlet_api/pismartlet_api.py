@@ -138,7 +138,7 @@ def update_json(start, status):
     json_file.close()
     print(f"{start} {status}")
     for event in data:
-        if event['start'] == start:
+        if int(event['start']) == int(start):
             print('updating')
             event['status'] = status
 
