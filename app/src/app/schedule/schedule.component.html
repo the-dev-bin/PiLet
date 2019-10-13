@@ -1,0 +1,30 @@
+
+    <div class="schedule-wrapper">
+      <ion-label class="schedule-">
+        
+      </ion-label>
+      <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+
+        <ion-item>
+            <ion-label>Choose a date</ion-label>
+            <ion-datetime
+              [dayShortNames]="customDayShortNames"
+              displayFormat="DDD. MMM DD, YY"
+              monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
+              ngModel name="date"
+              placeholder="MMM DD YY" required></ion-datetime>
+          </ion-item>
+          <ion-item>
+              <ion-label>Choose a time</ion-label>
+              <ion-datetime displayFormat="h:mm A" minuteValues="0,15,30,45"  ngModel name="time" required></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label>Duration(less than 4 hours)</ion-label>
+                <ion-datetime displayFormat="HH:mm" minuteValues="0,15,30,45"  ngModel name="duration" ></ion-datetime>
+            </ion-item>
+            <div class="submit">
+            <ion-button size="medium" color="medium" type="submit">Schedule</ion-button>              
+            </div>
+          </form>
+
+    </div>
