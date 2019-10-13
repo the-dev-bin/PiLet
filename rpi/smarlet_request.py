@@ -16,7 +16,6 @@ def get_content() -> json:
 
 def send_status(status, start_time) -> None:
     data = {"status": status, "start": start_time}
-
     requests.post(URL, json=json.dumps(data))
 
 
