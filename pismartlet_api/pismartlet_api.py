@@ -84,8 +84,8 @@ def is_active():
     data = get_data()
     for event in data:
         if event['status'] == 'active':
-            return make_response('on', 201)
-    return make_response('off', 201)
+            return jsonify({"status": "on"})
+    return jsonify({"status": "off"})
 
 
 def get_data() -> List:
