@@ -40,13 +40,13 @@ def schedule():
     durration_time = durration_time[11:16] #hours and minutes between 11 and 16
     
     #pull timestamp from time and date
-    start = date[:14] + time[:14] #date from date time from time
-    durration = int(start) + stringtoseconds(durration)
+    start_time = date[:14] + time[:14] #date from date time from time
+    durration = int(start) + stringtoseconds(durration_time)
 
     #define start as epoch timestamp
-    start = datetimetoepoch(start)
+    start = datetimetoepoch(start_time)
     #define end as epoch
-    end = int(start) + durration
+    end = start + durration
 
     event = {
         "start" : start,
