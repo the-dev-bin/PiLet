@@ -28,8 +28,7 @@ def post_status():
 @app.route("/scheduleEvent", methods=['POST'])
 @cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def schedule():
-    json_data = request.get_json()
-    data = json.loads(json_data)
+    data = request.get_json()
     print(data)
     return "recived"
 
