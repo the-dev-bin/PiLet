@@ -7,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PioutletStatusComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    
+   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
 
 }

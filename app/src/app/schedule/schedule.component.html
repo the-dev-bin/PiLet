@@ -1,17 +1,29 @@
 
     <div class="schedule-wrapper">
-      <ion-label>
-        Schedule your car to start!
+      <ion-label class="schedule-">
+        
       </ion-label>
+      <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+
         <ion-item>
             <ion-label>Choose a date</ion-label>
-            <ion-datetime value="1995-04-15" min="1990-02" max="2000"
+            <ion-datetime
               [dayShortNames]="customDayShortNames"
               displayFormat="DDD. MMM DD, YY"
-              monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"></ion-datetime>
+              monthShortNames="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
+              ngModel name="date"></ion-datetime>
           </ion-item>
           <ion-item>
               <ion-label>Choose a time</ion-label>
-              <ion-datetime displayFormat="h:mm A" minuteValues="0,15,30,45"></ion-datetime>
+              <ion-datetime displayFormat="h:mm A" minuteValues="0,15,30,45"  ngModel name="time"></ion-datetime>
             </ion-item>
+            <ion-item>
+                <ion-label>Duration(less than 4 hours)</ion-label>
+                <ion-datetime displayFormat="HH:mm" minuteValues="0,15,30,45"  ngModel name="duration" ></ion-datetime>
+            </ion-item>
+            <div class="submit">
+            <ion-button size="medium" color="medium" type="submit">Schedule</ion-button>              
+            </div>
+          </form>
+
     </div>
