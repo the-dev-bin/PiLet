@@ -24,11 +24,11 @@ def get_status():
 @app.route("/postStatus", methods=['POST'])
 @cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def post_status():
-    data = request.get_json()
+    data = request.get_json()[0]
     start = data['start']
     status = data['status']
 
-    for event in data:
+    for event in get_data():
         if event['start'] == start:
             update_json(start, status)
     

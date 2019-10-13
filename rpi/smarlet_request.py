@@ -2,21 +2,22 @@ import json
 
 import requests
 
-URL = "http://hack.thedevbin.com:9000/getStatus"
+getURL = "http://hack.thedevbin.com:9000/getStatus"
+postURL = "http://hack.thedevbin.com:9000/postStatus"
 
 # for testing
 #URL = "https://pastebin.com/raw/YrB02wei"
 
 
 def get_content() -> json:
-    content = requests.get(URL).content
+    content = requests.get(getURL).content
     data = json.loads(content)
     return data
 
 
 def send_status(status, start_time) -> None:
     data = {"status": status, "start": start_time}
-    requests.post(URL, json=json.dumps(data))
+    requests.post(postURL, json=json.dumps(data))
 
 
 def main() -> None:
