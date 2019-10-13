@@ -1,6 +1,6 @@
 import json
 
-import datetime
+from datetime import datetime, timezone
 from dateutil.parser import parse 
 
 from operator import itemgetter
@@ -62,7 +62,12 @@ def schedule():
 @app.route("/getSchedule", methods=['GET'])
 @cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def get_schedule():
-    return jsonify(get_next_three_pending())
+
+    data = get_next_three_pending()
+    for event in data:
+        event['start'] = epochtodatetime(event['start'])
+        event['end'] = epochtodatetime(event['end'])
+    return jsonify(data)
 
 
 @app.route("/active", methods=['GET'])
@@ -127,6 +132,10 @@ def stringtoseconds(time)->int:
     seconds = int(time[3:])*60
     return (hours+seconds)
 
+
+def epochtodatetime(seconds)->str:
+    dateobj = datetime.fromtimestamp(seconds, timezone.akst)
+    return str(dateobj)
 
 
 if __name__ == "__main__":
