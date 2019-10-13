@@ -1,34 +1,29 @@
-import datetime
-import re
+import json
 from typing import Dict
 
-from flask import Flask
-from flask_restful import Api, Resource
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
-api = Api(app)
 
 
-class API(Resource):
+@app.route("/", methods=['GET', 'POST'])
+def status():
+    if (request.method == 'POST'):
+        info = request.get_json()
+        return jsonify({'info': info}), 201
+    else:
+        return jsonify({"about": "Hello World"})
 
-    def __inti__(self):
-        pass
 
-    # Returns a json file
-    # returns next_start and length (A dictionary)
-    def post_status(self):
-        # Call get_data()
-        # put contents of get_data() into json and return
-        pass
+# Pulls data from a json file
+def get_data(file) -> Dict:
+    pass
 
-    def get_data(self, file) -> Dict:
-        # pulls data
-        pass
 
-    # Writes the data to json
-    def post_status(self, file) -> None:
-        pass
+@app.route('/test')
+def testing():
+    return "<form action='/' method='POST'><input type='submit'></form>"
 
-    @staticmethod
-    def get_weather():
-        pass
+
+if __name__ == "__main__":
+    app.run(debug=True)
