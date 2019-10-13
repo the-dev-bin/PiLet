@@ -76,7 +76,7 @@ def testing():
 
 def get_data() -> List:
     with open(DATA) as json_file:
-        data = json.loads(json_file)
+        data = json.load(json_file)
     return data
 
 
@@ -106,7 +106,7 @@ def get_next_three_pending() -> List:
 
 def append_json(event):
     with open (DATA, 'w') as json_file:
-        data = json.loads(json_file.read())
+        data = json.load(json_file)
         data.append(event)
         json_file.write(str(data))
 
