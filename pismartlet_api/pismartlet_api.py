@@ -25,13 +25,11 @@ def get_data() -> List:
 def filter_pending_data() -> List:
     data = get_data()
     pending = []
-    print(data)
     for event in data:
         if event['status'] == 'pending':
             pending.append(event)
         else:
             continue
-    print(pending)
     return pending
 
 
