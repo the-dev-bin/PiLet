@@ -30,7 +30,7 @@ def post_status():
 def schedule():
     data = request.get_json()
     print(data)
-    return "recived"
+    return jsonify(data)
 
 
 @app.route("/getSchedule", methods=['GET'])
