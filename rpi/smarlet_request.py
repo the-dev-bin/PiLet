@@ -6,7 +6,7 @@ getURL = "http://hack.thedevbin.com:9000/getStatus"
 postURL = "http://hack.thedevbin.com:9000/postStatus"
 
 # for testing
-#URL = "https://pastebin.com/raw/YrB02wei"
+# URL = "https://pastebin.com/raw/YrB02wei"
 
 
 def get_content() -> json:

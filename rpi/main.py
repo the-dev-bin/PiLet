@@ -1,14 +1,12 @@
-import os
 import time
 
-from smarlet_request import get_content, send_status
 from relay import get_state, gpio_off, gpio_on
+from smarlet_request import get_content, send_status
 
 PIN = 26
 
 
 def main() -> None:
-
 
     data = get_content()
 
@@ -24,7 +22,6 @@ def main() -> None:
         if get_state(PIN) == 1:
             gpio_off(PIN)
             send_status(start, 'done')
-
 
 
 if __name__ == "__main__":
