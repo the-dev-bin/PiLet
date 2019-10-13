@@ -20,7 +20,7 @@ export class UpcomingComponent implements OnInit {
 
    updateData(stuff){
      this.dataStuff = stuff;
-     console.log(this.dataStuff);
+    //  console.log(this.dataStuff);
    }
 
   ngOnInit() {}
