@@ -1,9 +1,9 @@
 import time
+
 import RPi.GPIO as GPIO
 
 
-
-def gpio_on(channel,seconds):
+def gpio_on(channel, seconds) -> None:
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(channel, GPIO.OUT)
     start = int(time.time())
@@ -17,11 +17,9 @@ def gpio_on(channel,seconds):
     GPIO.output(channel, state)
 
 
-def main():
-    gpio_on(37,30)
-
-
+def main() -> None:
+    gpio_on(37, 30)
 
 
 if __name__ == '__main__':
-    main()   
+    main()
