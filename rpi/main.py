@@ -1,13 +1,13 @@
-from relay import gpio_on, get_state, gpio_off
-from get_json import get_content
-import time
 import os
+import time
+
+from get_json import get_content
+from relay import get_state, gpio_off, gpio_on
 
 PIN = 26
 
 
-
-def main():
+def main() -> None:
     if time.time() > os.environ["START_TIME"] + (4 * 60 * 60):
         gpio_off(PIN)
 
