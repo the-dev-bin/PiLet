@@ -35,7 +35,7 @@ def post_status():
     return "recived"
 
 
-@app.route("getData", methods=['GET'])
+@app.route("/getData", methods=['GET'])
 @cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def get_all():
     return jsonify(get_data())
