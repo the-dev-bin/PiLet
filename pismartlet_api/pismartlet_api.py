@@ -27,7 +27,7 @@ def post_status():
     data = json.loads(request.get_json())
     start = data['start']
     status = data['status']
-
+    print(start, " ", status)
     for event in get_data():
         if event['start'] == start:
             update_json(start, status)
