@@ -2,10 +2,10 @@ import json
 
 import requests
 
-# URL = "hack.thedevbin.com:9000/getstatus"
+URL = "http://hack.thedevbin.com:9000/getStatus"
 
 # for testing
-URL = "https://pastebin.com/raw/YrB02wei"
+#URL = "https://pastebin.com/raw/YrB02wei"
 
 
 def get_content() -> json:
