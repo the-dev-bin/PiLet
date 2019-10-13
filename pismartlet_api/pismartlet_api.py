@@ -105,10 +105,15 @@ def get_next_three_pending() -> List:
 
 
 def append_json(event):
-    with open (DATA, 'w') as json_file:
-        data = json.load(json_file)
-        data.append(event)
-        json_file.write(str(data))
+    json_file =  open(DATA, 'r')
+    data = json.load(json_file)
+    json_file.close()
+
+    data.append(event)
+
+    json_file = open(DATA, 'w')
+    json_file.write(json.dumps(data))
+    json_file.close()
 
 
 def datetimetoepoch(date_timestr)->int:
