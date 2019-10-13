@@ -18,9 +18,14 @@ export class ScheduleComponent implements OnInit {
   onSubmit(f: NgForm) {
     console.log(f.value);  // { first: '', last: '' }
     console.log(f.valid);  // false
-    this.http.post("http://hack.thedevbin.com:9000/test",
+
+    this.http.post("http://hack.thedevbin.com:9000/status",
     {
       data: f.value
-    })
+    }).subscribe(() => { // * not callback
+      console.log(`ahhhhhhh`); 
+    }, error => {
+      console.log("Error", error);
+    });
   }
 }
