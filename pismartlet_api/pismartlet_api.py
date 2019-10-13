@@ -87,8 +87,8 @@ def is_active():
     data = get_data()
     for event in data:
         if event['status'] == 'active':
-            return 'on'
-    return 'off'
+            return 'on', 201
+    return 'off', 201
 
 @app.route('/test')
 def testing():
