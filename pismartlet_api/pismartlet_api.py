@@ -24,7 +24,8 @@ def get_status():
 @app.route("/postStatus", methods=['POST'])
 @cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
 def post_status():
-    data = request.get_json()[0]
+    data = request.get_json()
+    print(data)
     start = data['start']
     status = data['status']
 
