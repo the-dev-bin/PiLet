@@ -16,7 +16,7 @@ def main() -> None:
     if time.time() >= start and time.time() <= start + 300:
         if get_state(PIN) == 0:
             gpio_on(PIN)
-            send_status(start, 'pending')
+            send_status(start, 'active')
 
     if time.time() >= end and time.time() <= end + 300:
         if get_state(PIN) == 1:
