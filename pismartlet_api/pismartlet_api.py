@@ -1,24 +1,42 @@
 import json
-from typing import Dict
+from typing import Dict, List
 
 from flask import Flask, jsonify, request
 
+DATA = 'data.json'
 app = Flask(__name__)
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/status", methods=['GET', 'POST'])
 def status():
     if (request.method == 'POST'):
         info = request.get_json()
         return jsonify({'info': info}), 201
     else:
-        return jsonify({"about": "Hello World"})
+        return json.dumps(get_next_pending())
 
 
-# Pulls data from a json file
-def get_data(file) -> Dict:
-    pass
+def get_data() -> List:
+    with open(DATA) as json_file:
+        data = json.load(json_file)
+    return data
 
+
+def filter_pending_data() -> List:
+    data = get_data()
+    for event in data:
+        if event['status'] != 'pending':
+            data.remove(event)
+    return data
+
+
+def get_next_pending() -> Dict:
+    data = filter_pending_data()
+    current = data[0]
+    for event in data:
+        if event['start'] < current['start']:
+            current = event
+    return current
 
 @app.route('/test')
 def testing():
