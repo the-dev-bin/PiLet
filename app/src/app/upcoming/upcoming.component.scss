@@ -2,13 +2,23 @@
     margin-top: 15%;
     margin-left: 15%;
     margin-right: 15%;
+
+    ion-label {
+        text-decoration: underline;
+        font-size: 2.75vh;
+        margin-bottom: 24vh;
+    }
 }
 .indiv-change {
-    border: 2px solid red;
-    border-radius: 22;
+    margin-top: 1vh;
+    border: 2px solid black;
+    border-radius: 22px;
     width: 100%;
     height: 5vh;
+
+
     p {
         margin-top: 0.5vh;
+        margin-left: 1vh;
     }
 }
