@@ -2,18 +2,16 @@ import json
 from typing import Dict, List
 
 from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
 
 DATA = 'data.json'
 app = Flask(__name__)
 
+cors = CORS(app, resources={r"/foo": {"origins": "http://localhost:port"}})
 
-@app.route("/status", methods=['GET', 'POST'])
-def status():
-    if (request.method == 'POST'):
-        info = request.get_json()
-        return jsonify({'info': info}), 201
-    else:
-        return json.dumps(get_next_pending())
+@app.route("/getStatus", methods=['GET'])
+def get_status():
+    return json.dumps(get_next_pending())
 
 
 def get_data() -> List:
@@ -44,10 +42,31 @@ def get_next_pending() -> Dict:
     return current
 
 
+@app.route("/postStatus", methods=['POST'])
+@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
+def post_status():
+    return
+
+
+@app.route("/scheduleEvent", methods=['POST'])
+@cross_origin(origin='localhost',headers=['Content-Type','Authorization'])
+def schedule():
+    return
+
+
+@app.route("/getSchedule", methods=['GET'])
+def get_schedule():
+    return jsonify(get_data)
+
+
+@app.route("active", methods=['GET'])
+def is_active():
+    return
+
 @app.route('/test')
 def testing():
     return "<form action='/' method='POST'><input type='submit'></form>"
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
