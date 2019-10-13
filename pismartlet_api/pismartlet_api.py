@@ -41,12 +41,11 @@ def schedule():
     
     #pull timestamp from time and date
     start_time = date[:14] + time[:14] #date from date time from time
-    durration = int(start) + stringtoseconds(durration_time)
 
     #define start as epoch timestamp
     start = datetimetoepoch(start_time)
-    #define end as epoch
-    end = start + durration
+    end = start + stringtoseconds(durration_time)
+
 
     event = {
         "start" : start,
@@ -54,7 +53,7 @@ def schedule():
         "status" : "pending"
     }
 
-    append_json(event)
+    # append_json(event)
     print(event)
     return jsonify(data)
 
