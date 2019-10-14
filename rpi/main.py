@@ -1,7 +1,7 @@
 import time
 
 from relay import get_state, gpio_off, gpio_on
-from smarlet_request import get_content, send_status
+from smartlet_request import get_content, send_status
 
 PIN = 26
 
