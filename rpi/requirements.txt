@@ -1,0 +1,5 @@
+requests
+time
+json
+os
+RPi.GPIO
