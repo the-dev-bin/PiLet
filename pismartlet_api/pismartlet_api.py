@@ -2,6 +2,7 @@ import json
 from datetime import datetime, timezone
 from operator import itemgetter
 from typing import Dict, List
+import configparser
 
 from dateutil.parser import parse
 from flask import Flask, jsonify, request, make_response
@@ -10,41 +11,48 @@ from flask_cors import CORS, cross_origin
 DATA = 'data.json'
 app = Flask(__name__)
 
-cors = CORS(app, resources={r"/foo": {"origins": "http://localhost:port"}})
 
+config = configparser.ConfigParser()
+config.read('../CONFIG.TXT')
 
+appURL = config['APP']['URL']
+
+# returns the next pending event
 @app.route("/getStatus", methods=['GET'])
-@cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])
+@cross_origin(origin=appURL, headers=['Content-Type', 'Authorization'])
 def get_status() -> json:
     return jsonify(get_next_pending())
 
 
+# take status from and assign it to coresponding event
 @app.route("/postStatus", methods=['POST'])
-@cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])
+@cross_origin(origin=appURL, headers=['Content-Type', 'Authorization'])
 def post_status() -> str:
     data = json.loads(request.get_json())
     start = data['start']
     status = data['status']
+
     for event in get_data():
         if int(event['start']) == int(start):
             update_json(start, status)
-
     return "recived"
 
 
+# returns all events
 @app.route("/getData", methods=['GET'])
-@cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])
+@cross_origin(origin=appURL, headers=['Content-Type', 'Authorization'])
 def get_all() -> json:
     return jsonify(get_data())
 
-
+#takes event and adds it to data.json
 @app.route("/scheduleEvent", methods=['POST'])
-@cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])
+@cross_origin(origin=appURL, headers=['Content-Type', 'Authorization'])
 def schedule() -> json:
     data = request.get_json()['data']
     date = data['date']
     time = data['time']
 
+    #parse string time to epoch
     # pull hours minutes from duration
     durration_time = data['duration']
     durration_time = durration_time[11:16] # hours and minutes between 11 and 16
@@ -66,9 +74,9 @@ def schedule() -> json:
     print(event)
     return jsonify(data)
 
-
+# return pending events
 @app.route("/getSchedule", methods=['GET'])
-@cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])
+@cross_origin(origin=appURL, headers=['Content-Type', 'Authorization'])
 def get_schedule() -> json:
 
     data = get_next_three_pending()
@@ -77,9 +85,9 @@ def get_schedule() -> json:
         event['end'] = epochtodatetime(event['end'])
     return jsonify(data)
 
-
+# return if pi is on or off
 @app.route("/active", methods=['GET'])
-@cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])
+@cross_origin(origin=appURL, headers=['Content-Type', 'Authorization'])
 def is_active():
     data = get_data()
     for event in data:
@@ -88,6 +96,7 @@ def is_active():
     return jsonify({"status": "off"})
 
 
+# retrun all events
 def get_data() -> List:
     with open(DATA) as json_file:
         data = json.load(json_file)
@@ -117,7 +126,7 @@ def get_next_three_pending() -> List:
     print(data[0:3])
     return data[0:3]
 
-
+# add event to data.json
 def append_json(event) -> None:
     json_file = open(DATA, 'r')
     data = json.load(json_file)
@@ -142,7 +151,7 @@ def update_json(start, status) -> None:
     json_file.write(json.dumps(data))
     json_file.close()
 
-
+# functions for switching between time formats
 def datetimetoepoch(date_timestr) -> int:
     date_object = parse(date_timestr)
     seconds = date_object.timestamp()

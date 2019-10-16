@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 import os
 import time
-
+import configparser
 import RPi.GPIO as GPIO
 
-PIN = 26
+config = configparser.ConfigParser()
+config.read('../CONFIG.TXT')
+
 
 
 def gpio_on(channel) -> None:
@@ -38,6 +40,8 @@ def get_state(channel) -> GPIO:
 
 
 def main() -> None:
+    # read pin from config file
+    PIN = config['RPI']['pin']
     gpio_on(PIN)
     time.sleep(5)
     gpio_off(PIN)

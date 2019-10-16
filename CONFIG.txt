@@ -1,0 +1,13 @@
+[RPI]
+# raspberry pi gpio pin to wire the relay signal to
+pin = 26 
+
+
+[API]
+url = localhost
+port = 9000
+
+
+[APP]
+url = localhost
+port = 80
