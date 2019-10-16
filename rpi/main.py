@@ -1,9 +1,14 @@
-import time
+import time, configparser
 
 from relay import get_state, gpio_off, gpio_on
 from smartlet_request import get_content, send_status
 
-PIN = 26
+
+config = configparser.ConfigParser()
+config.read('../CONFIG.TXT')
+
+#read pin from config file
+PIN = config['RPI']['pin']
 
 
 def main() -> None:

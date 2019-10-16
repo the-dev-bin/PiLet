@@ -2,12 +2,15 @@ import json
 
 import requests
 
-getURL = "http://hack.thedevbin.com:9000/getStatus"
-postURL = "http://hack.thedevbin.com:9000/postStatus"
+import configparser
 
-# for testing
-# URL = "https://pastebin.com/raw/YrB02wei"
 
+config = configparser.ConfigParser()
+config.read('../CONFIG.TXT')
+
+# create urls from config file
+getURL = config['api']['url'] + config['api']['port'] + '/getStatus'
+postURL = config['api']['url'] + config['api']['port'] + '/postStatus'
 
 def get_content() -> json:
     content = requests.get(getURL).content
