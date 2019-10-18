@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 
 config = configparser.ConfigParser()
-config.read('../CONFIG.TXT')
+config.read('CONFIG.txt')
 
 appURL = config['APP']['URL']
 

@@ -14,7 +14,7 @@ export class UpcomingComponent implements OnInit {
 
   constructor(private http:HttpClient) {
 
-    this.http.get("http://hack.thedevbin.com:9000/getSchedule").subscribe(data => this.updateData(data));
+    this.http.get("http://localhost:9000/getSchedule").subscribe(data => this.updateData(data));
     this.arrayOfKeys = Object.keys(this.dataStuff);
    }
 

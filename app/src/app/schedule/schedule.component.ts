@@ -19,7 +19,7 @@ export class ScheduleComponent implements OnInit {
   onSubmit(f: NgForm) {
     console.log(f.value);  
     // console.log(f.valid);  // false
-    this.http.post("http://hack.thedevbin.com:9000/scheduleEvent",
+    this.http.post("http://localhost:9000/scheduleEvent",
     {
       data: f.value
     }).subscribe(() => { // * not callback
